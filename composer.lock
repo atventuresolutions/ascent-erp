@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a788b90311d6b67c50901ec29c5cb23",
+    "content-hash": "a9c881f7fa1237d95facd0e3280ab87f",
     "packages": [
         {
             "name": "brick/math",
@@ -2656,6 +2656,38 @@
                 }
             ],
             "time": "2024-01-28T23:22:08+00:00"
+        },
+        {
+            "name": "modules/auth",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/auth",
+                "reference": "e35a53503cf5517f4f4ab86c0269876058412493"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Auth\\Providers\\AuthServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Auth\\": "src/",
+                    "Modules\\Auth\\Tests\\": "tests/",
+                    "Modules\\Auth\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Auth\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "monolog/monolog",
