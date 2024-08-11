@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a9c881f7fa1237d95facd0e3280ab87f",
+    "content-hash": "4b9e72a33f4b182975b05739ff8103f7",
     "packages": [
         {
             "name": "brick/math",
@@ -2679,6 +2679,38 @@
                     "Modules\\Auth\\Tests\\": "tests/",
                     "Modules\\Auth\\Database\\Factories\\": "database/factories/",
                     "Modules\\Auth\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "modules/inventory",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/inventory",
+                "reference": "81fe0fe1cdde9d82a98da6c9e33abaa969294ee4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Inventory\\Providers\\InventoryServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Inventory\\": "src/",
+                    "Modules\\Inventory\\Tests\\": "tests/",
+                    "Modules\\Inventory\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Inventory\\Database\\Seeders\\": "database/seeders/"
                 }
             },
             "license": [

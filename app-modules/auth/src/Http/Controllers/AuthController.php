@@ -19,14 +19,14 @@ class AuthController extends Controller
      */
     public function login(Request $request): JsonResponse
     {
-        $validate = $request->validate([
+        $validated = $request->validate([
             'email'    => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        $user = User::whereEmail($validate['email'])->first();
+        $user = User::whereEmail($validated['email'])->first();
         if ($user) {
-            if (Hash::check($validate['password'], $user->password)) {
+            if (Hash::check($validated['password'], $user->password)) {
                 return response()->json([
                     'message' => 'Login successful',
                     'data'    => [

@@ -20,10 +20,12 @@ class AuthTest extends TestCase
     {
         $user = User::factory()->create();
         Sanctum::actingAs($user);
+
         $response = $this->postJson(route('auth.login'), [
             'email'    => $user->email,
             'password' => 'password',
         ]);
+
         $response->assertStatus(200)->assertJsonStructure(
             ['message', 'data' => ['token']]
         );
@@ -44,6 +46,7 @@ class AuthTest extends TestCase
         ]);
 
         $response = $this->postJson(route('auth.logout'));
+
         $response->assertStatus(200)->assertJsonStructure(
             ['message']
         );

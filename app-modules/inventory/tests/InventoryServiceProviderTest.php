@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Auth\Tests;
+namespace Modules\Inventory\Tests;
 
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Tests\CreatesApplication;
 
-class AuthServiceProviderTest extends BaseTestCase
+class InventoryServiceProviderTest extends BaseTestCase
 {
     use CreatesApplication;
 }
