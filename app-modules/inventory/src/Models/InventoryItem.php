@@ -20,4 +20,14 @@ class InventoryItem extends Model
         'image',
         'notes',
     ];
+
+    /**
+     * Get the stock record associated with the item.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function inventoryStock()
+    {
+        return $this->hasOne(InventoryStock::class);
+    }
 }

@@ -79,6 +79,11 @@ class InventoryItemTest extends TestCase
             'created_at',
             'updated_at',
         ]);
+
+        $this->assertDatabaseHas('inventory_stocks', [
+            'inventory_item_id' => $response['id'],
+            'current'           => 0,
+        ]);
     }
 
     /**
