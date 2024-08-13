@@ -23,6 +23,24 @@ class InventoryStock extends Model
      */
     public function inventoryItem()
     {
-        return $this->belongsTo(InventoryItem::class);
+        return $this->belongsTo(
+            InventoryItem::class,
+            'inventory_item_id',
+            'id'
+        );
+    }
+
+    /**
+     * Get the inventory stock histories owned
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function inventoryStockHistories()
+    {
+        return $this->hasMany(
+            InventoryStockHistory::class,
+            'inventory_stock_id',
+            'id'
+        );
     }
 }

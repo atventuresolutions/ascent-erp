@@ -18,7 +18,8 @@ class InventoryStockController extends Controller
     ): JsonResponse {
         $validated = $request->validate([
             'quantity' => ['required', 'numeric'],
-            'type'  => ['required', 'in:STOCK_IN,STOCK_OUT'],
+            'type'     => ['required', 'in:STOCK_IN,STOCK_OUT'],
+            'notes'    => ['nullable'],
         ]);
 
         $item  = InventoryItem::find($itemId);
@@ -29,6 +30,15 @@ class InventoryStockController extends Controller
             $stock->current -= $validated['quantity'];
         }
         $stock->save();
+
+        // Add history
+        $item->inventoryStock->inventoryStockHistories()
+            ->create([
+                'quantity' => $validated['quantity'],
+                'type'     => $validated['type'],
+                'system'   => 'INVENTORY',
+                'notes'    => $validated['notes'] ?? null,
+            ]);
 
         return response()->json(['message' => 'Stock updated successfully']);
     }

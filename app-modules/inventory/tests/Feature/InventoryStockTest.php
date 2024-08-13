@@ -36,6 +36,12 @@ class InventoryStockTest extends TestCase
             'inventory_item_id' => $inventoryItem->id,
             'current'           => 10,
         ]);
+        $this->assertDatabaseHas('inventory_stock_histories', [
+            'inventory_stock_id' => $inventoryItem->inventoryStock->id,
+            'quantity'           => 10,
+            'type'               => 'STOCK_IN',
+            'system'             => 'INVENTORY',
+        ]);
     }
 
     /**
@@ -61,6 +67,12 @@ class InventoryStockTest extends TestCase
         $this->assertDatabaseHas('inventory_stocks', [
             'inventory_item_id' => $inventoryItem->id,
             'current'           => -10,
+        ]);
+        $this->assertDatabaseHas('inventory_stock_histories', [
+            'inventory_stock_id' => $inventoryItem->inventoryStock->id,
+            'quantity'           => 10,
+            'type'               => 'STOCK_OUT',
+            'system'             => 'INVENTORY',
         ]);
     }
 }

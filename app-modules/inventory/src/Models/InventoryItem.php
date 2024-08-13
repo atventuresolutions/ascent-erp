@@ -28,6 +28,10 @@ class InventoryItem extends Model
      */
     public function inventoryStock()
     {
-        return $this->hasOne(InventoryStock::class);
+        return $this->hasOne(
+            InventoryStock::class,
+            'inventory_item_id',
+            'id'
+        );
     }
 }
