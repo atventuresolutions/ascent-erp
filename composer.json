@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.8",
         "modules/auth": "*",
         "modules/crm": "*",
+        "modules/hr": "*",
         "modules/inventory": "*",
         "modules/sales": "*"
     },

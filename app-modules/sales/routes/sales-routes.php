@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Sales\Http\Controllers\OrderController;
 
 Route::group(['prefix' => 'sales'], function () {
-    // Inventory item routes
+    // Orders routes
     Route::get('orders', [OrderController::class, 'index'])
         ->name('sales.orders.index');
     Route::post('orders', [OrderController::class, 'store'])
