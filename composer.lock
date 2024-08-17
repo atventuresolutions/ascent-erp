@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b9e72a33f4b182975b05739ff8103f7",
+    "content-hash": "1f5ad16fc11eaa4ba6e93f1e7be8ef88",
     "packages": [
         {
             "name": "brick/math",
@@ -2679,6 +2679,38 @@
                     "Modules\\Auth\\Tests\\": "tests/",
                     "Modules\\Auth\\Database\\Factories\\": "database/factories/",
                     "Modules\\Auth\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "modules/crm",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/crm",
+                "reference": "8fc788abec78ca4e47949e938c70d6dcb4eb7a15"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Crm\\Providers\\CrmServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Crm\\": "src/",
+                    "Modules\\Crm\\Tests\\": "tests/",
+                    "Modules\\Crm\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Crm\\Database\\Seeders\\": "database/seeders/"
                 }
             },
             "license": [
@@ -9500,5 +9532,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

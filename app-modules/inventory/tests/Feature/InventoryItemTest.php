@@ -43,6 +43,9 @@ class InventoryItemTest extends TestCase
                 ],
             ],
         ]);
+
+        $this->assertCount(5, $response['data']);
+        $this->assertDatabaseCount('inventory_items', 5);
     }
 
     /**
@@ -80,6 +83,7 @@ class InventoryItemTest extends TestCase
             'updated_at',
         ]);
 
+        $this->assertDatabaseCount('inventory_items', 1);
         $this->assertDatabaseHas('inventory_stocks', [
             'inventory_item_id' => $response['id'],
             'current'           => 0,
@@ -181,8 +185,6 @@ class InventoryItemTest extends TestCase
 
         $response->assertStatus(204);
 
-        $this->assertDatabaseMissing('inventory_items', [
-            'id' => $inventoryItem->id,
-        ]);
+        $this->assertDatabaseCount('inventory_items', 0);
     }
 }
