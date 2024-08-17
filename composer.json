@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.8",
         "modules/auth": "*",
         "modules/crm": "*",
-        "modules/inventory": "*"
+        "modules/inventory": "*",
+        "modules/sales": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
