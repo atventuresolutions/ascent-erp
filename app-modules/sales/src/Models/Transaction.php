@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Crm\Models\Customer;
 
-class Order extends Model
+class Transaction extends Model
 {
     use HasFactory;
 
-    protected $with = ['orderItems'];
+    protected $with = ['transactionItems'];
 
     protected $fillable = [
         'customer_id',
@@ -35,11 +35,11 @@ class Order extends Model
     }
 
     /**
-     * Get order items
+     * Get transaction items
      * @return HasMany
      */
-    public function orderItems(): HasMany
+    public function transactionItems(): HasMany
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(TransactionItem::class);
     }
 }

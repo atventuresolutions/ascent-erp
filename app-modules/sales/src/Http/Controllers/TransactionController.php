@@ -5,9 +5,9 @@ namespace Modules\Sales\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\Inventory\Models\InventoryItem;
-use Modules\Sales\Models\Order;
+use Modules\Sales\Models\Transaction;
 
-class OrderController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         return response()
-            ->json(Order::paginate());
+            ->json(Transaction::paginate());
     }
 
     /**
@@ -37,9 +37,9 @@ class OrderController extends Controller
             'items.*.quantity' => ['required', 'numeric'],
         ]);
 
-        $orderItems = $validated['items'];
-        $orderItemTotal = 0;
-        foreach ($orderItems as $item) {
+        $transactionItems = $validated['items'];
+        $transactionItemTotal = 0;
+        foreach ($transactionItems as $item) {
 
             if (!empty($item['sku'])) { // If SKU is provided, get available inventory item information
                 $inventoryItem = InventoryItem::whereSku($item['sku'])->first();
@@ -49,28 +49,28 @@ class OrderController extends Controller
                 }
             }
 
-            $orderItemTotal += $item['price'] * $item['quantity'];
+            $transactionItemTotal += $item['price'] * $item['quantity'];
         }
 
         // Calculate tax
         $taxRate = env('TAX_RATE', 0.1);
-        $validated['tax'] = $orderItemTotal * $taxRate;
+        $validated['tax'] = $transactionItemTotal * $taxRate;
 
-        $order = Order::create([
+        $transaction = Transaction::create([
             'customer_id' => $validated['customer_id'] ?? null,
             'status' => $validated['status'],
-            'total' => $orderItemTotal,
+            'total' => $transactionItemTotal,
             'discount' => $validated['discount'],
             'shipping' => $validated['shipping'],
             'tax' => $validated['tax'],
-            'grand_total' => $orderItemTotal + $validated['shipping'] - $validated['discount'],
+            'grand_total' => $transactionItemTotal + $validated['shipping'] - $validated['discount'],
             'notes' => $validated['notes'] ?? null,
         ]);
 
-        $order->orderItems()->createMany($orderItems);
+        $transaction->transactionItems()->createMany($transactionItems);
 
         return response()
-            ->json($order->load('orderItems'), 200);
+            ->json($transaction->load('transactionItems'), 200);
     }
 
     /**
@@ -79,7 +79,7 @@ class OrderController extends Controller
     public function show(string $id)
     {
         return response()
-            ->json(Order::findOrFail($id));
+            ->json(Transaction::findOrFail($id));
     }
 
     /**
@@ -92,11 +92,11 @@ class OrderController extends Controller
             'notes' => ['nullable', 'string'],
         ]);
 
-        $order = Order::findOrFail($id);
-        $order->update($validated);
+        $transaction = Transaction::findOrFail($id);
+        $transaction->update($validated);
 
         return response()
-            ->json($order, 200);
+            ->json($transaction, 200);
     }
 
     /**
@@ -104,8 +104,8 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        $order = Order::findOrFail($id);
-        $order->delete();
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
 
         return response()
             ->json(null, 204);

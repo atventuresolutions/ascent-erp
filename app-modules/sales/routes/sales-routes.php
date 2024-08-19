@@ -2,18 +2,18 @@
 
 // Inventory routes
 use Illuminate\Support\Facades\Route;
-use Modules\Sales\Http\Controllers\OrderController;
+use Modules\Sales\Http\Controllers\TransactionController;
 
 Route::group(['prefix' => 'sales'], function () {
-    // Orders routes
-    Route::get('orders', [OrderController::class, 'index'])
-        ->name('sales.orders.index');
-    Route::post('orders', [OrderController::class, 'store'])
-        ->name('sales.orders.store');
-    Route::get('orders/{id}', [OrderController::class, 'show'])
-        ->name('sales.orders.show');
-    Route::put('orders/{id}', [OrderController::class, 'update'])
-        ->name('sales.orders.update');
-    Route::delete('orders/{id}', [OrderController::class, 'destroy'])
-        ->name('sales.orders.destroy');
+    // Transactions routes
+    Route::get('transactions', [TransactionController::class, 'index'])
+        ->name('sales.transactions.index');
+    Route::post('transactions', [TransactionController::class, 'store'])
+        ->name('sales.transactions.store');
+    Route::get('transactions/{id}', [TransactionController::class, 'show'])
+        ->name('sales.transactions.show');
+    Route::put('transactions/{id}', [TransactionController::class, 'update'])
+        ->name('sales.transactions.update');
+    Route::delete('transactions/{id}', [TransactionController::class, 'destroy'])
+        ->name('sales.transactions.destroy');
 })->middleware('auth:sanctum');

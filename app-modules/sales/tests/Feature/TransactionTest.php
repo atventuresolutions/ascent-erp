@@ -5,29 +5,29 @@ namespace Modules\Sales\Tests\Feature;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
-use Modules\Sales\Enums\OrderStatus;
-use Modules\Sales\Models\Order;
+use Modules\Sales\Enums\TransactionStatus;
+use Modules\Sales\Models\Transaction;
 use Modules\Sales\Tests\SalesServiceProviderTest as TestCase;
 
-class OrderTest extends TestCase
+class TransactionTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * Test list orders.
+     * Test list transactions.
      *
      * @return void
      */
-    public function test_list_orders()
+    public function test_list_transactions()
     {
-        Order::factory()
-            ->hasOrderItems(3)
+        Transaction::factory()
+            ->hasTransactionItems(3)
             ->count(5)
             ->create();
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->getJson(route('sales.orders.index'));
+        $response = $this->getJson(route('sales.transactions.index'));
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -44,10 +44,10 @@ class OrderTest extends TestCase
                         'notes',
                         'created_at',
                         'updated_at',
-                        'order_items' => [
+                        'transaction_items' => [
                             '*' => [
                                 'id',
-                                'order_id',
+                                'transaction_id',
                                 'inventory_item_id',
                                 'sku',
                                 'name',
@@ -65,17 +65,17 @@ class OrderTest extends TestCase
     }
 
     /**
-     * Test create order.
+     * Test create transaction.
      *
      * @return void
      */
-    public function test_create_order()
+    public function test_create_transaction()
     {
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->postJson(route('sales.orders.store'), [
-            'status' => OrderStatus::PENDING,
+        $response = $this->postJson(route('sales.transactions.store'), [
+            'status' => TransactionStatus::PENDING,
             'discount' => 0,
             'tax' => 0,
             'shipping' => 0,
@@ -109,10 +109,10 @@ class OrderTest extends TestCase
                 'notes',
                 'created_at',
                 'updated_at',
-                'order_items' => [
+                'transaction_items' => [
                     '*' => [
                         'id',
-                        'order_id',
+                        'transaction_id',
                         'inventory_item_id',
                         'sku',
                         'name',
@@ -124,24 +124,24 @@ class OrderTest extends TestCase
                 ],
             ]);
 
-        $this->assertDatabaseCount('orders', 1);
-        $this->assertDatabaseCount('order_items', 2);
+        $this->assertDatabaseCount('transactions', 1);
+        $this->assertDatabaseCount('transaction_items', 2);
     }
 
     /**
-     * Test show order.
+     * Test show transaction.
      *
      * @return void
      */
-    public function test_show_order()
+    public function test_show_transaction()
     {
-        $order = Order::factory()
-            ->hasOrderItems(3)
+        $transaction = Transaction::factory()
+            ->hasTransactionItems(3)
             ->create();
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->getJson(route('sales.orders.show', $order->id));
+        $response = $this->getJson(route('sales.transactions.show', $transaction->id));
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -156,10 +156,10 @@ class OrderTest extends TestCase
                 'notes',
                 'created_at',
                 'updated_at',
-                'order_items' => [
+                'transaction_items' => [
                     '*' => [
                         'id',
-                        'order_id',
+                        'transaction_id',
                         'inventory_item_id',
                         'sku',
                         'name',
@@ -171,24 +171,24 @@ class OrderTest extends TestCase
                 ],
             ]);
 
-        $this->assertDatabaseCount('orders', 1);
+        $this->assertDatabaseCount('transactions', 1);
     }
 
     /**
-     * Test update order.
+     * Test update transaction.
      *
      * @return void
      */
-    public function test_update_order()
+    public function test_update_transaction()
     {
-        $order = Order::factory()
-            ->hasOrderItems(3)
+        $transaction = Transaction::factory()
+            ->hasTransactionItems(3)
             ->create();
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->putJson(route('sales.orders.show', $order->id), [
-            'status' => OrderStatus::CANCELLED,
+        $response = $this->putJson(route('sales.transactions.show', $transaction->id), [
+            'status' => TransactionStatus::CANCELLED,
             'notes' => 'This notes is for testing purpose.',
         ]);
 
@@ -205,10 +205,10 @@ class OrderTest extends TestCase
                 'notes',
                 'created_at',
                 'updated_at',
-                'order_items' => [
+                'transaction_items' => [
                     '*' => [
                         'id',
-                        'order_id',
+                        'transaction_id',
                         'inventory_item_id',
                         'sku',
                         'name',
@@ -220,30 +220,30 @@ class OrderTest extends TestCase
                 ],
             ]);
 
-        $this->assertDatabaseHas('orders', [
-            'id' => $order->id,
-            'status' => OrderStatus::CANCELLED,
+        $this->assertDatabaseHas('transactions', [
+            'id' => $transaction->id,
+            'status' => TransactionStatus::CANCELLED,
             'notes' => 'This notes is for testing purpose.',
         ]);
     }
 
     /**
-     * Test delete order.
+     * Test delete transaction.
      *
      * @return void
      */
-    public function test_delete_order()
+    public function test_delete_transaction()
     {
-        $order = Order::factory()
-            ->hasOrderItems(3)
+        $transaction = Transaction::factory()
+            ->hasTransactionItems(3)
             ->create();
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->deleteJson(route('sales.orders.destroy', $order->id));
+        $response = $this->deleteJson(route('sales.transactions.destroy', $transaction->id));
 
         $response->assertStatus(204);
 
-        $this->assertDatabaseCount('orders', 0);
+        $this->assertDatabaseCount('transactions', 0);
     }
 }

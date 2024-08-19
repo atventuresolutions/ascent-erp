@@ -3,12 +3,12 @@
 namespace Modules\Sales\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Sales\Enums\OrderStatus;
+use Modules\Sales\Enums\TransactionStatus;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Sales\Models\Model>
  */
-class OrderFactory extends Factory
+class TransactionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,10 +19,10 @@ class OrderFactory extends Factory
     {
         return [
             'status' => $this->faker->randomElement([
-                OrderStatus::PENDING,
-                OrderStatus::PROCESSING,
-                OrderStatus::COMPLETED,
-                OrderStatus::CANCELLED
+                TransactionStatus::PENDING,
+                TransactionStatus::PROCESSING,
+                TransactionStatus::COMPLETED,
+                TransactionStatus::CANCELLED
             ]),
             'total' => $this->faker->randomFloat(2, 100, 1000),
             'discount' => $this->faker->randomFloat(2, 0, 100),

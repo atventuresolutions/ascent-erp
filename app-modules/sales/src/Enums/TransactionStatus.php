@@ -1,7 +1,7 @@
 <?php
 
 namespace Modules\Sales\Enums;
-enum OrderStatus: string
+enum TransactionStatus: string
 {
     case PENDING = 'PENDING';
     case PROCESSING = 'PROCESSING';

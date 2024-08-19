@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Modules\Inventory\Models\InventoryItem;
 
-class OrderItem extends Model
+class TransactionItem extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'order_id',
+        'transaction_id',
         'inventory_item_id',
         'sku',
         'name',
@@ -26,17 +26,17 @@ class OrderItem extends Model
     ];
 
     /**
-     * Get the order that owns the order item
+     * Get the transaction that owns the transaction item
      *
      * @return BelongsTo
      */
-    public function order(): BelongsTo
+    public function transaction(): BelongsTo
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Transaction::class);
     }
 
     /**
-     * Get the inventory item that owns the order item
+     * Get the inventory item that owns the transaction item
      *
      * @return BelongsTo
      */
