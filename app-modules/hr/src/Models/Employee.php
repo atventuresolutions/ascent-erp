@@ -18,4 +18,13 @@ class Employee extends Model
         'address',
         'birthday',
     ];
+
+    /**
+     * Get the compensation associated with the Employee
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function compensation() {
+        return $this->hasOne(Compensation::class);
+    }
 }

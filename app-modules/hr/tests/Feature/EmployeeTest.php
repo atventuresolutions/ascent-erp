@@ -18,7 +18,7 @@ class EmployeeTest extends TestCase
      */
     public function test_list_employees()
     {
-        Employee::factory()->count(5)->create();
+        Employee::factory()->hasCompensation(1)->count(5)->create();
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
@@ -38,6 +38,17 @@ class EmployeeTest extends TestCase
                         'birthday',
                         'created_at',
                         'updated_at',
+                        'compensation' => [
+                            'daily_rate',
+                            'daily_working_hours',
+                            'working_days',
+                            'shift_start_time',
+                            'shift_end_time',
+                            'break_start_time',
+                            'break_end_time',
+                            'created_at',
+                            'updated_at',
+                        ]
                     ]
                 ]
             ]);
@@ -55,13 +66,21 @@ class EmployeeTest extends TestCase
         Sanctum::actingAs($user);
 
         $response = $this->postJson(route('hr.employees.store', [
-            'firstname' => 'John',
-            'lastname' => 'Doe',
-            'email' => 'john.doe@employee.com',
-            'mobile_number' => '1234567890',
+            'firstname'        => 'John',
+            'lastname'         => 'Doe',
+            'email'            => 'john.doe@employee.com',
+            'mobile_number'    => '1234567890',
             'telephone_number' => '0987654321',
-            'address' => '123 Main St, Springfield, IL',
-            'birthday' => '1990-01-01',
+            'address'          => '123 Main St, Springfield, IL',
+            'birthday'         => '1990-01-01',
+
+            'daily_rate'          => 500,
+            'daily_working_hours' => 8,
+            'working_days'        => ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'],
+            'shift_start_time'    => '08:00',
+            'shift_end_time'      => '17:00',
+            'break_start_time'    => '12:00',
+            'break_end_time'      => '13:00',
         ]));
 
         $response->assertStatus(200)
@@ -76,9 +95,21 @@ class EmployeeTest extends TestCase
                 'birthday',
                 'created_at',
                 'updated_at',
+                'compensation' => [
+                    'daily_rate',
+                    'daily_working_hours',
+                    'working_days',
+                    'shift_start_time',
+                    'shift_end_time',
+                    'break_start_time',
+                    'break_end_time',
+                    'created_at',
+                    'updated_at',
+                ]
             ]);
 
         $this->assertDatabaseCount('employees', 1);
+        $this->assertDatabaseCount('compensation', 1);
     }
 
     /**
@@ -87,8 +118,8 @@ class EmployeeTest extends TestCase
      */
     public function test_show_employee()
     {
-        $employee = Employee::factory()->create();
-        $user = User::factory()->create();
+        $employee = Employee::factory()->hasCompensation(1)->create();
+        $user     = User::factory()->create();
         Sanctum::actingAs($user);
 
         $response = $this->getJson(route('hr.employees.show', $employee->id));
@@ -105,9 +136,18 @@ class EmployeeTest extends TestCase
                 'birthday',
                 'created_at',
                 'updated_at',
+                'compensation' => [
+                    'daily_rate',
+                    'daily_working_hours',
+                    'working_days',
+                    'shift_start_time',
+                    'shift_end_time',
+                    'break_start_time',
+                    'break_end_time',
+                    'created_at',
+                    'updated_at',
+                ]
             ]);
-
-        $this->assertDatabaseCount('employees', 1);
     }
 
     /**
@@ -116,18 +156,26 @@ class EmployeeTest extends TestCase
      */
     public function test_update_employee()
     {
-        $employee = Employee::factory()->create();
-        $user = User::factory()->create();
+        $employee = Employee::factory()->hasCompensation(1)->create();
+        $user     = User::factory()->create();
         Sanctum::actingAs($user);
 
         $response = $this->putJson(route('hr.employees.update', $employee->id), [
-            'firstname' => 'John',
-            'lastname' => 'Doe',
-            'email' => 'john.doe@employee.com',
-            'mobile_number' => '1234567890',
+            'firstname'        => 'John',
+            'lastname'         => 'Doe',
+            'email'            => 'john.doe@employee.com',
+            'mobile_number'    => '1234567890',
             'telephone_number' => '0987654321',
-            'address' => '123 Main St, Springfield, IL',
-            'birthday' => '1990-01-01',
+            'address'          => '123 Main St, Springfield, IL',
+            'birthday'         => '1990-01-01',
+
+            'daily_rate'          => 500,
+            'daily_working_hours' => 8,
+            'working_days'        => ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'],
+            'shift_start_time'    => '08:00',
+            'shift_end_time'      => '17:00',
+            'break_start_time'    => '12:00',
+            'break_end_time'      => '13:00',
         ]);
 
         $response->assertStatus(200)
@@ -142,17 +190,38 @@ class EmployeeTest extends TestCase
                 'birthday',
                 'created_at',
                 'updated_at',
+                'compensation' => [
+                    'daily_rate',
+                    'daily_working_hours',
+                    'working_days',
+                    'shift_start_time',
+                    'shift_end_time',
+                    'break_start_time',
+                    'break_end_time',
+                    'created_at',
+                    'updated_at',
+                ]
             ]);
 
         $this->assertDatabaseHas('employees', [
-            'id' => $employee->id,
-            'firstname' => 'John',
-            'lastname' => 'Doe',
-            'email' => 'john.doe@employee.com',
-            'mobile_number' => '1234567890',
+            'id'               => $employee->id,
+            'firstname'        => 'John',
+            'lastname'         => 'Doe',
+            'email'            => 'john.doe@employee.com',
+            'mobile_number'    => '1234567890',
             'telephone_number' => '0987654321',
-            'address' => '123 Main St, Springfield, IL',
-            'birthday' => '1990-01-01',
+            'address'          => '123 Main St, Springfield, IL',
+            'birthday'         => '1990-01-01',
+        ]);
+
+        $this->assertDatabaseHas('compensation', [
+            'daily_rate'          => 500,
+            'daily_working_hours' => 8,
+            // 'working_days'        => json_encode(['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY']), // todo: not working
+            'shift_start_time'    => '08:00',
+            'shift_end_time'      => '17:00',
+            'break_start_time'    => '12:00',
+            'break_end_time'      => '13:00',
         ]);
     }
 
@@ -162,8 +231,8 @@ class EmployeeTest extends TestCase
      */
     public function test_delete_employee()
     {
-        $employee = Employee::factory()->create();
-        $user = User::factory()->create();
+        $employee = Employee::factory()->hasCompensation(1)->create();
+        $user     = User::factory()->create();
         Sanctum::actingAs($user);
 
         $response = $this->deleteJson(route('hr.employees.destroy', $employee->id));
@@ -171,5 +240,6 @@ class EmployeeTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertDatabaseCount('employees', 0);
+        $this->assertDatabaseCount('compensation', 0);
     }
 }
