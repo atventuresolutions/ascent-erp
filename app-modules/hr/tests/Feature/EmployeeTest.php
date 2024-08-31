@@ -22,7 +22,7 @@ class EmployeeTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->getJson(route('hr.employees.index'));
+        $response = $this->getJson(route('employees.index'));
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -67,7 +67,7 @@ class EmployeeTest extends TestCase
         $user = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->postJson(route('hr.employees.store', [
+        $response = $this->postJson(route('employees.store', [
             'firstname'        => 'John',
             'lastname'         => 'Doe',
             'email'            => 'john.doe@employee.com',
@@ -128,7 +128,7 @@ class EmployeeTest extends TestCase
         $user     = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->getJson(route('hr.employees.show', $employee->id));
+        $response = $this->getJson(route('employees.show', $employee->id));
 
         $response->assertStatus(200)
             ->assertJsonStructure([
@@ -168,7 +168,7 @@ class EmployeeTest extends TestCase
         $user     = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->putJson(route('hr.employees.update', $employee->id), [
+        $response = $this->putJson(route('employees.update', $employee->id), [
             'firstname'        => 'John',
             'lastname'         => 'Doe',
             'email'            => 'john.doe@employee.com',
@@ -249,7 +249,7 @@ class EmployeeTest extends TestCase
         $user     = User::factory()->create();
         Sanctum::actingAs($user);
 
-        $response = $this->deleteJson(route('hr.employees.destroy', $employee->id));
+        $response = $this->deleteJson(route('employees.destroy', $employee->id));
 
         $response->assertStatus(200);
 

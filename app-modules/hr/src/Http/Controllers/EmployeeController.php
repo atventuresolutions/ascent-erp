@@ -73,9 +73,9 @@ class EmployeeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $employee)
     {
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::findOrFail($employee);
         return response()
             ->json($employee->load('compensation'));
     }
@@ -83,7 +83,7 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $employee)
     {
         $validated = $request->validate([
             // employee information
@@ -107,7 +107,7 @@ class EmployeeController extends Controller
             'break_end_time'             => ['nullable', 'date_format:H:i'],
         ]);
 
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::findOrFail($employee);
         $employee->update([
             'firstname'        => $validated['firstname'],
             'lastname'         => $validated['lastname'],
@@ -137,9 +137,9 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $employee)
     {
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::findOrFail($employee);
         $employee->delete();
 
         return response()
