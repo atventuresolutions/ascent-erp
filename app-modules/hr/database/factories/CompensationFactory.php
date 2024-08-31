@@ -20,7 +20,11 @@ class CompensationFactory extends Factory
         return [
             'daily_rate'          => $this->faker->randomFloat(2, 100, 1000),
             'daily_working_hours' => $this->faker->numberBetween(1, 24),
-            'working_days'        => ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'],
+
+            'overtime_multiplier'         => 10,
+            'holiday_multiplier'          => 20,
+            'special_holiday_multiplier'  => 10,
+
             'shift_start_time'    => '08:00',
             'shift_end_time'      => '17:00',
             'break_start_time'    => '12:00',

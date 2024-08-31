@@ -13,7 +13,11 @@ class Compensation extends Model
         'employee_id',
         'daily_rate',
         'daily_working_hours',
-        'working_days',
+
+        'overtime_multiplier',
+        'holiday_multiplier',
+        'special_holiday_multiplier',
+
         'shift_start_time',
         'shift_end_time',
         'break_start_time',

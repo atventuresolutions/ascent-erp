@@ -16,7 +16,11 @@ return new class extends Migration
             $table->foreignId('employee_id')->constrained('employees')->cascadeOnDelete();
             $table->decimal('daily_rate', 10);
             $table->integer('daily_working_hours');
-            $table->json('working_days');
+
+            // multipliers
+            $table->double('overtime_multiplier');
+            $table->double('holiday_multiplier');
+            $table->double('special_holiday_multiplier');
 
             // shift timings
             $table->time('shift_start_time');

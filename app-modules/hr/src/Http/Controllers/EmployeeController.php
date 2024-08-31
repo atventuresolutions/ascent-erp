@@ -24,23 +24,24 @@ class EmployeeController extends Controller
     {
         $validated = $request->validate([
             // employee
-            'firstname'        => ['required', 'string'],
-            'lastname'         => ['required', 'string'],
-            'email'            => ['required', 'email'],
-            'mobile_number'    => ['nullable', 'string'],
-            'telephone_number' => ['nullable', 'string'],
-            'address'          => ['nullable', 'string'],
-            'birthday'         => ['nullable', 'date'],
+            'firstname'                  => ['required', 'string'],
+            'lastname'                   => ['required', 'string'],
+            'email'                      => ['required', 'email'],
+            'mobile_number'              => ['nullable', 'string'],
+            'telephone_number'           => ['nullable', 'string'],
+            'address'                    => ['nullable', 'string'],
+            'birthday'                   => ['nullable', 'date'],
 
             // compensation information
-            'daily_rate'          => ['required', 'numeric'],
-            'daily_working_hours' => ['required', 'numeric'],
-            'working_days'        => ['required', 'array'],
-            'working_days.*'      => ['required', 'in:SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY'],
-            'shift_start_time'    => ['required', 'date_format:H:i'],
-            'shift_end_time'      => ['required', 'date_format:H:i'],
-            'break_start_time'    => ['nullable', 'date_format:H:i'],
-            'break_end_time'      => ['nullable', 'date_format:H:i'],
+            'daily_rate'                 => ['required', 'numeric'],
+            'daily_working_hours'        => ['required', 'numeric'],
+            'overtime_multiplier'        => ['required', 'numeric'],
+            'holiday_multiplier'         => ['required', 'numeric'],
+            'special_holiday_multiplier' => ['required', 'numeric'],
+            'shift_start_time'           => ['required', 'date_format:H:i'],
+            'shift_end_time'             => ['required', 'date_format:H:i'],
+            'break_start_time'           => ['nullable', 'date_format:H:i'],
+            'break_end_time'             => ['nullable', 'date_format:H:i'],
         ]);
 
         $employee = Employee::create([
@@ -54,13 +55,15 @@ class EmployeeController extends Controller
         ]);
 
         $employee->compensation()->create([
-            'daily_rate'          => $validated['daily_rate'],
-            'daily_working_hours' => $validated['daily_working_hours'],
-            'working_days'        => $validated['working_days'],
-            'shift_start_time'    => $validated['shift_start_time'],
-            'shift_end_time'      => $validated['shift_end_time'],
-            'break_start_time'    => $validated['break_start_time'],
-            'break_end_time'      => $validated['break_end_time'],
+            'daily_rate'                 => $validated['daily_rate'],
+            'daily_working_hours'        => $validated['daily_working_hours'],
+            'overtime_multiplier'        => $validated['overtime_multiplier'],
+            'holiday_multiplier'         => $validated['holiday_multiplier'],
+            'special_holiday_multiplier' => $validated['special_holiday_multiplier'],
+            'shift_start_time'           => $validated['shift_start_time'],
+            'shift_end_time'             => $validated['shift_end_time'],
+            'break_start_time'           => $validated['break_start_time'],
+            'break_end_time'             => $validated['break_end_time'],
         ]);
 
         return response()
@@ -84,23 +87,24 @@ class EmployeeController extends Controller
     {
         $validated = $request->validate([
             // employee information
-            'firstname'        => ['required', 'string'],
-            'lastname'         => ['required', 'string'],
-            'email'            => ['required', 'email'],
-            'mobile_number'    => ['nullable', 'string'],
-            'telephone_number' => ['nullable', 'string'],
-            'address'          => ['nullable', 'string'],
-            'birthday'         => ['nullable', 'date'],
+            'firstname'                  => ['required', 'string'],
+            'lastname'                   => ['required', 'string'],
+            'email'                      => ['required', 'email'],
+            'mobile_number'              => ['nullable', 'string'],
+            'telephone_number'           => ['nullable', 'string'],
+            'address'                    => ['nullable', 'string'],
+            'birthday'                   => ['nullable', 'date'],
 
             // compensation information
-            'daily_rate'          => ['required', 'numeric'],
-            'daily_working_hours' => ['required', 'numeric'],
-            'working_days'        => ['required', 'array'],
-            'working_days.*'      => ['required', 'in:SUNDAY,MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY'],
-            'shift_start_time'    => ['required', 'date_format:H:i'],
-            'shift_end_time'      => ['required', 'date_format:H:i'],
-            'break_start_time'    => ['nullable', 'date_format:H:i'],
-            'break_end_time'      => ['nullable', 'date_format:H:i'],
+            'daily_rate'                 => ['required', 'numeric'],
+            'daily_working_hours'        => ['required', 'numeric'],
+            'overtime_multiplier'        => ['required', 'numeric'],
+            'holiday_multiplier'         => ['required', 'numeric'],
+            'special_holiday_multiplier' => ['required', 'numeric'],
+            'shift_start_time'           => ['required', 'date_format:H:i'],
+            'shift_end_time'             => ['required', 'date_format:H:i'],
+            'break_start_time'           => ['nullable', 'date_format:H:i'],
+            'break_end_time'             => ['nullable', 'date_format:H:i'],
         ]);
 
         $employee = Employee::findOrFail($id);
@@ -115,13 +119,15 @@ class EmployeeController extends Controller
         ]);
 
         $employee->compensation()->update([
-            'daily_rate'          => $validated['daily_rate'],
-            'daily_working_hours' => $validated['daily_working_hours'],
-            'working_days'        => $validated['working_days'],
-            'shift_start_time'    => $validated['shift_start_time'],
-            'shift_end_time'      => $validated['shift_end_time'],
-            'break_start_time'    => $validated['break_start_time'],
-            'break_end_time'      => $validated['break_end_time'],
+            'daily_rate'                 => $validated['daily_rate'],
+            'daily_working_hours'        => $validated['daily_working_hours'],
+            'overtime_multiplier'        => $validated['overtime_multiplier'],
+            'holiday_multiplier'         => $validated['holiday_multiplier'],
+            'special_holiday_multiplier' => $validated['special_holiday_multiplier'],
+            'shift_start_time'           => $validated['shift_start_time'],
+            'shift_end_time'             => $validated['shift_end_time'],
+            'break_start_time'           => $validated['break_start_time'],
+            'break_end_time'             => $validated['break_end_time'],
         ]);
 
         return response()
