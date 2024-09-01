@@ -22,6 +22,7 @@ class Compensation extends Model
         'shift_end_time',
         'break_start_time',
         'break_end_time',
+        'late_grace_period',
     ];
 
     protected $casts = [

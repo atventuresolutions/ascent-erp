@@ -25,8 +25,9 @@ return new class extends Migration
             // shift timings
             $table->time('shift_start_time');
             $table->time('shift_end_time');
-            $table->time('break_start_time')->nullable();
-            $table->time('break_end_time')->nullable();
+            $table->time('break_start_time');
+            $table->time('break_end_time');
+            $table->integer('late_grace_period');
             $table->timestamps();
         });
     }

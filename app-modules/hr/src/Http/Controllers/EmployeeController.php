@@ -40,8 +40,9 @@ class EmployeeController extends Controller
             'special_holiday_multiplier' => ['required', 'numeric'],
             'shift_start_time'           => ['required', 'date_format:H:i'],
             'shift_end_time'             => ['required', 'date_format:H:i'],
-            'break_start_time'           => ['nullable', 'date_format:H:i'],
-            'break_end_time'             => ['nullable', 'date_format:H:i'],
+            'break_start_time'           => ['required', 'date_format:H:i'],
+            'break_end_time'             => ['required', 'date_format:H:i'],
+            'late_grace_period'          => ['required', 'numeric'],
         ]);
 
         $employee = Employee::create([
@@ -64,6 +65,7 @@ class EmployeeController extends Controller
             'shift_end_time'             => $validated['shift_end_time'],
             'break_start_time'           => $validated['break_start_time'],
             'break_end_time'             => $validated['break_end_time'],
+            'late_grace_period'          => $validated['late_grace_period'],
         ]);
 
         return response()
@@ -103,8 +105,9 @@ class EmployeeController extends Controller
             'special_holiday_multiplier' => ['required', 'numeric'],
             'shift_start_time'           => ['required', 'date_format:H:i'],
             'shift_end_time'             => ['required', 'date_format:H:i'],
-            'break_start_time'           => ['nullable', 'date_format:H:i'],
-            'break_end_time'             => ['nullable', 'date_format:H:i'],
+            'break_start_time'           => ['required', 'date_format:H:i'],
+            'break_end_time'             => ['required', 'date_format:H:i'],
+            'late_grace_period'          => ['required', 'numeric'],
         ]);
 
         $employee = Employee::findOrFail($employee);
@@ -128,6 +131,7 @@ class EmployeeController extends Controller
             'shift_end_time'             => $validated['shift_end_time'],
             'break_start_time'           => $validated['break_start_time'],
             'break_end_time'             => $validated['break_end_time'],
+            'late_grace_period'          => $validated['late_grace_period'],
         ]);
 
         return response()

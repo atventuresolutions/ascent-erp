@@ -48,6 +48,7 @@ class EmployeeTest extends TestCase
                             'shift_end_time',
                             'break_start_time',
                             'break_end_time',
+                            'late_grace_period',
                             'created_at',
                             'updated_at',
                         ]
@@ -85,6 +86,7 @@ class EmployeeTest extends TestCase
             'shift_end_time'             => '17:00',
             'break_start_time'           => '12:00',
             'break_end_time'             => '13:00',
+            'late_grace_period'          => 5,
         ]));
 
         $response->assertStatus(200)
@@ -109,6 +111,7 @@ class EmployeeTest extends TestCase
                     'shift_end_time',
                     'break_start_time',
                     'break_end_time',
+                    'late_grace_period',
                     'created_at',
                     'updated_at',
                 ]
@@ -152,6 +155,7 @@ class EmployeeTest extends TestCase
                     'shift_end_time',
                     'break_start_time',
                     'break_end_time',
+                    'late_grace_period',
                     'created_at',
                     'updated_at',
                 ]
@@ -186,6 +190,7 @@ class EmployeeTest extends TestCase
             'shift_end_time'             => '17:00',
             'break_start_time'           => '12:00',
             'break_end_time'             => '13:00',
+            'late_grace_period'          => 5,
         ]);
 
         $response->assertStatus(200)
@@ -210,6 +215,7 @@ class EmployeeTest extends TestCase
                     'shift_end_time',
                     'break_start_time',
                     'break_end_time',
+                    'late_grace_period',
                     'created_at',
                     'updated_at',
                 ]
@@ -227,15 +233,16 @@ class EmployeeTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('compensation', [
-            'daily_rate'          => 500,
-            'daily_working_hours' => 8,
-            'overtime_multiplier' => 10,
-            'holiday_multiplier'  => 20,
+            'daily_rate'                 => 500,
+            'daily_working_hours'        => 8,
+            'overtime_multiplier'        => 10,
+            'holiday_multiplier'         => 20,
             'special_holiday_multiplier' => 10,
-            'shift_start_time'    => '08:00',
-            'shift_end_time'      => '17:00',
-            'break_start_time'    => '12:00',
-            'break_end_time'      => '13:00',
+            'shift_start_time'           => '08:00',
+            'shift_end_time'             => '17:00',
+            'break_start_time'           => '12:00',
+            'break_end_time'             => '13:00',
+            'late_grace_period'          => 5,
         ]);
     }
 
