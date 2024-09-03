@@ -258,7 +258,7 @@ class EmployeeTest extends TestCase
 
         $response = $this->deleteJson(route('employees.destroy', $employee->id));
 
-        $response->assertStatus(200);
+        $response->assertStatus(204);
 
         $this->assertDatabaseCount('employees', 0);
         $this->assertDatabaseCount('compensation', 0);

@@ -142,7 +142,7 @@ class HolidayTest extends TestCase
 
         $response = $this->deleteJson(route('holidays.destroy', $holiday->id));
 
-        $response->assertStatus(200);
+        $response->assertStatus(204);
 
         $this->assertDatabaseMissing('holidays', [
             'id' => $holiday->id,

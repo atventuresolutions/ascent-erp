@@ -4,6 +4,8 @@ namespace Modules\Hr\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Employee extends Model
 {
@@ -22,9 +24,20 @@ class Employee extends Model
     /**
      * Get the compensation associated with the Employee
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function compensation() {
+    public function compensation()
+    {
         return $this->hasOne(Compensation::class);
+    }
+
+    /**
+     * Get the timekeeping records associated with the Employee
+     *
+     * @return HasMany
+     */
+    public function timekeepings()
+    {
+        return $this->hasMany(Timekeeping::class);
     }
 }

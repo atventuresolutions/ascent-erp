@@ -6,32 +6,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Compensation extends Model
+class Timekeeping extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'employee_id',
-        'daily_rate',
-        'daily_working_hours',
-
-        'overtime_multiplier',
-        'holiday_multiplier',
-        'special_holiday_multiplier',
-
-        'shift_start_time',
-        'shift_end_time',
+        'date',
+        'first_time_in',
+        'first_time_out',
         'break_start_time',
         'break_end_time',
-        'late_grace_period',
-    ];
-
-    protected $casts = [
-        'working_days' => 'array',
+        'second_time_in',
+        'second_time_out',
+        'total_rendered',
+        'total_overtime',
+        'total_late',
+        'total_undertime',
+        'status',
+        'notes',
     ];
 
     /**
-     * Get the employee that owns the Compensation
+     * Get the employee that owns the timekeeping.
      *
      * @return BelongsTo
      */

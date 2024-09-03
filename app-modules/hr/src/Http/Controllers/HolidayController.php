@@ -80,6 +80,6 @@ class HolidayController extends Controller
         $holiday->delete();
 
         return response()
-            ->json($holiday);
+            ->json($holiday, 204);
     }
 }

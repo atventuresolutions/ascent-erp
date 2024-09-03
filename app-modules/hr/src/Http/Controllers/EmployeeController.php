@@ -147,6 +147,6 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return response()
-            ->json($employee);
+            ->json($employee, 204);
     }
 }
