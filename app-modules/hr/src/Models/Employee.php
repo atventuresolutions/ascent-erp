@@ -40,4 +40,24 @@ class Employee extends Model
     {
         return $this->hasMany(Timekeeping::class);
     }
+
+    /**
+     * Get the deductions associated with the Employee
+     *
+     * @return HasMany
+     */
+    public function employeeDeductions()
+    {
+        return $this->hasMany(EmployeeDeduction::class);
+    }
+
+    /**
+     * Get the additions associated with the Employee
+     *
+     * @return HasMany
+     */
+    public function employeeAdditions()
+    {
+        return $this->hasMany(EmployeeAddition::class);
+    }
 }
