@@ -29,6 +29,7 @@ class EmployeeTest extends TestCase
                 'data' => [
                     '*' => [
                         'id',
+                        'code',
                         'firstname',
                         'lastname',
                         'email',
@@ -92,6 +93,7 @@ class EmployeeTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'id',
+                'code',
                 'firstname',
                 'lastname',
                 'email',
@@ -136,6 +138,7 @@ class EmployeeTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'id',
+                'code',
                 'firstname',
                 'lastname',
                 'email',
@@ -196,6 +199,7 @@ class EmployeeTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonStructure([
                 'id',
+                'code',
                 'firstname',
                 'lastname',
                 'email',

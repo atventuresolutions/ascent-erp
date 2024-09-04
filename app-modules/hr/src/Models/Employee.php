@@ -60,4 +60,34 @@ class Employee extends Model
     {
         return $this->hasMany(EmployeeAddition::class);
     }
+
+    /**
+     * Generate a unique code for the Employee
+     * @return string
+     */
+    public static function generateCode()
+    {
+        // Generate a 6 char alphanumeric code
+        $generatedCode = substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
+        // Check if existing
+        if (Employee::whereCode($generatedCode)->exists()) {
+            return Employee::generateCode();
+        } else {
+            return $generatedCode;
+        }
+    }
+
+    /**
+     * Override boot method
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Generate code before creating
+        static::creating(function ($employee) {
+            $employee->code = Employee::generateCode();
+        });
+    }
 }
