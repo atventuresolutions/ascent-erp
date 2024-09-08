@@ -19,6 +19,16 @@ class Employee extends Model
         'telephone_number',
         'address',
         'birthday',
+        'emergency_contact_name',
+        'emergency_contact_number',
+        'emergency_contact_relationship',
+        'job_title',
+        'department',
+        'employment_status',
+        'date_hired',
+        'date_regularized',
+        'date_resigned',
+        'date_terminated',
     ];
 
     protected $casts = [

@@ -24,6 +24,16 @@ class EmployeeFactory extends Factory
             'telephone_number' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
             'birthday' => $this->faker->date,
+            'emergency_contact_name' => $this->faker->name,
+            'emergency_contact_number' => $this->faker->phoneNumber,
+            'emergency_contact_relationship' => $this->faker->word,
+            'job_title' => $this->faker->word,
+            'department' => $this->faker->word,
+            'employment_status' => 'ACTIVE',
+            'date_hired' => $this->faker->date,
+            'date_regularized' => $this->faker->date,
+            'date_resigned' => $this->faker->date,
+            'date_terminated' => $this->faker->date,
         ];
     }
 }

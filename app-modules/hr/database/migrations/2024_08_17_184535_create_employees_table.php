@@ -16,11 +16,21 @@ return new class extends Migration
             $table->string('code', 9)->unique();
             $table->string('firstname');
             $table->string('lastname');
-            $table->string('email')->unique();
-            $table->string('mobile_number')->nullable();
-            $table->string('telephone_number')->nullable();
-            $table->string('address')->nullable();
-            $table->date('birthday')->nullable();
+            $table->string('email');
+            $table->string('mobile_number');
+            $table->string('telephone_number');
+            $table->string('address');
+            $table->date('birthday');
+            $table->string('emergency_contact_name');
+            $table->string('emergency_contact_number');
+            $table->string('emergency_contact_relationship');
+            $table->string('job_title');
+            $table->string('department');
+            $table->string('employment_status');
+            $table->string('date_hired');
+            $table->string('date_regularized')->nullable();
+            $table->string('date_resigned')->nullable();
+            $table->string('date_terminated')->nullable();
             $table->timestamps();
         });
     }
