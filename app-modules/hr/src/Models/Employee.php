@@ -21,6 +21,11 @@ class Employee extends Model
         'birthday',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
     /**
      * Get the compensation associated with the Employee
      *

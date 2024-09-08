@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->double('total_late')->comment('System generated, in minutes not hours.');
             $table->double('total_undertime')->comment('System generated, in minutes not hours.');
             $table->enum('status', ['PENDING', 'APPROVED']);
-            $table->text('notes')->nullable();
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

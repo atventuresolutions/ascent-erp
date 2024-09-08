@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('tax', 10, 2);
             $table->decimal('shipping', 10, 2);
             $table->decimal('grand_total', 10, 2);
-            $table->text('notes')->nullable();
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->enum('type', ['FIXED', 'PERCENTAGE']);
             $table->double('amount', 10);
             $table->date('start_date');
-            $table->date('end_date')->nullable();
-            $table->text('notes')->nullable();
+            $table->date('end_date');
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

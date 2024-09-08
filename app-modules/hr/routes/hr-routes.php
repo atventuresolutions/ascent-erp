@@ -7,6 +7,7 @@ use Modules\Hr\Http\Controllers\EmployeeAdditionController;
 use Modules\Hr\Http\Controllers\EmployeeController;
 use Modules\Hr\Http\Controllers\EmployeeDeductionController;
 use Modules\Hr\Http\Controllers\HolidayController;
+use Modules\Hr\Http\Controllers\PayrollController;
 use Modules\Hr\Http\Controllers\TimekeepingController;
 
 Route::group(['prefix' => 'hr'], function () {
@@ -15,9 +16,8 @@ Route::group(['prefix' => 'hr'], function () {
     Route::apiResource('timekeepings', TimekeepingController::class);
     Route::apiResource('additions', AdditionController::class);
     Route::apiResource('deductions', DeductionController::class);
+    Route::apiResource('payrolls', PayrollController::class);
 
-    Route::apiResource('employees.employeeDeductions', EmployeeDeductionController::class)
-        ->shallow();
-    Route::apiResource('employees.employeeAdditions', EmployeeAdditionController::class)
-        ->shallow();
+    Route::apiResource('employees.employeeDeductions', EmployeeDeductionController::class)->shallow();
+    Route::apiResource('employees.employeeAdditions', EmployeeAdditionController::class)->shallow();
 })->middleware('auth:sanctum');

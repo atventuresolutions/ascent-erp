@@ -6,35 +6,40 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Timekeeping extends Model
+class PayrollEmployee extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'payroll_id',
         'employee_id',
-        'date',
-        'first_time_in',
-        'first_time_out',
-        'break_start_time',
-        'break_end_time',
-        'second_time_in',
-        'second_time_out',
-        'total_rendered',
-        'total_overtime',
-        'total_late',
-        'total_undertime',
-        'status',
+        'basic_pay',
+        'overtime_pay',
+        'holiday_pay',
+        'total_deductions',
+        'total_additions',
+        'net_pay',
         'notes',
+        'data'
     ];
 
     protected $casts = [
+        'data' => 'array',
         'created_at' => 'datetime:Y-m-d',
         'updated_at' => 'datetime:Y-m-d',
     ];
 
     /**
-     * Get the employee that owns the timekeeping.
-     *
+     * Get the payroll that owns the payroll employee
+     * @return BelongsTo
+     */
+    public function payroll()
+    {
+        return $this->belongsTo(Payroll::class);
+    }
+
+    /**
+     * Get the employee that owns the PayrollEmployee
      * @return BelongsTo
      */
     public function employee()

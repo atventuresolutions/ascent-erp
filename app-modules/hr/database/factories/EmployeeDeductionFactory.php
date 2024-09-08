@@ -25,7 +25,7 @@ class EmployeeDeductionFactory extends Factory
             'type'        => $this->faker->randomElement(['FIXED', 'PERCENTAGE']),
             'amount'      => $this->faker->randomFloat(2, 0, 10000),
             'start_date'  => $this->faker->date(),
-            'end_date'    => $this->faker->optional()->date(),
+            'end_date'    => $this->faker->date(),
             'notes'       => $this->faker->text(),
         ];
     }

@@ -28,7 +28,7 @@ class TimekeepingFactory extends Factory
 
             'break_start_time' => '12:00:00',
             'break_end_time'   => '13:00:00',
-            'total_rendered'   => 8,
+            'total_rendered'   => 480, // 8 hours
             'total_overtime'   => 0,
             'total_late'       => 0,
             'total_undertime'  => 0,

@@ -19,6 +19,11 @@ class EmployeeDeduction extends Model
         'notes',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
     /*
      * Get the employee that owns the deduction.
      *

@@ -28,6 +28,8 @@ class Compensation extends Model
 
     protected $casts = [
         'working_days' => 'array',
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
     ];
 
     /**

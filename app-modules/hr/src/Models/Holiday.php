@@ -14,4 +14,9 @@ class Holiday extends Model
         'date',
         'type',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
 }
