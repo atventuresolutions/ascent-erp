@@ -3,10 +3,10 @@
 namespace Modules\Hr\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Modules\Hr\Models\Model;
+use Modules\Hr\Models\Timekeeping;
 
 /**
- * @extends Factory<Model>
+ * @extends Factory<Timekeeping>
  */
 class TimekeepingFactory extends Factory
 {

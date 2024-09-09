@@ -4,10 +4,10 @@ namespace Modules\Hr\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Modules\Hr\Models\Addition;
-use Modules\Hr\Models\Model;
+use Modules\Hr\Models\EmployeeAddition;
 
 /**
- * @extends Factory<Model>
+ * @extends Factory<EmployeeAddition>
  */
 class EmployeeAdditionFactory extends Factory
 {

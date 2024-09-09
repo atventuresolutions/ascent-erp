@@ -77,6 +77,16 @@ class Employee extends Model
     }
 
     /**
+     * Get the notes associated with the Employee
+     *
+     * @return HasMany
+     */
+    public function notes() 
+    {
+        return $this->hasMany(Note::class);
+    }
+
+    /**
      * Generate a unique code for the Employee
      * @return string
      */

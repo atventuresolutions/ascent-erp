@@ -3,9 +3,10 @@
 namespace Modules\Hr\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Modules\Hr\Models\Employee;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Modules\Hr\Models\Model>
+ * @extends Factory<Employee>
  */
 class EmployeeFactory extends Factory
 {
