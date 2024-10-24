@@ -12,9 +12,26 @@ class AdditionController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    { 
+        $additions = Addition::query();
+
+        // Search
+        if (request('search')) {
+            $additions->where('name', 'like', '%' . request('search') . '%');
+        }
+
+        // Sorting
+        if (request('sortField')) {
+            $additions->orderBy(
+                request('sortField'), 
+                request('sortOrder') > 0 ? 'asc' : 'desc'
+            );
+        }
+
+        $additions = $additions->paginate(request('per_page', 10));
+
         return response()
-            ->json(Addition::paginate());
+            ->json($additions);
     }
 
     /**

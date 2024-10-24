@@ -11,7 +11,7 @@ use Modules\Hr\Http\Controllers\NoteController;
 use Modules\Hr\Http\Controllers\PayrollController;
 use Modules\Hr\Http\Controllers\TimekeepingController;
 
-Route::group(['prefix' => 'hr'], function () {
+Route::group(['prefix' => 'api/hr'], function () {
     Route::apiResource('employees', EmployeeController::class);
     Route::apiResource('holidays', HolidayController::class);
     Route::apiResource('timekeepings', TimekeepingController::class);

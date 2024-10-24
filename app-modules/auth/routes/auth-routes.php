@@ -13,11 +13,11 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Http\Controllers\AuthController;
 
-Route::group(['prefix' => 'auth'], function() {
+Route::group(['prefix' => 'api/auth'], function() {
     Route::post(
         'login', [AuthController::class, 'login']
     )->name('auth.login');
     Route::post(
         'logout', [AuthController::class, 'logout']
-    )->name('auth.logout');
+    )->name('auth.logout')->middleware('auth:sanctum');
 });

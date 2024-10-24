@@ -39,7 +39,7 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            'message' => 'Credentials mismatch',
+            'message' => 'Credentials mismatch. Please try again.',
         ], 401);
     }
 
