@@ -70,7 +70,7 @@ class HolidayTest extends TestCase
         $this->assertDatabaseHas('holidays', [
             'name' => 'New Year',
             'date' => '2022-01-01',
-            'type' => 'regular',
+            'type' => 'REGULAR',
         ]);
     }
 
@@ -126,7 +126,7 @@ class HolidayTest extends TestCase
         $this->assertDatabaseHas('holidays', [
             'name' => 'New Year',
             'date' => '2022-01-01',
-            'type' => 'regular',
+            'type' => 'REGULAR',
         ]);
     }
 
